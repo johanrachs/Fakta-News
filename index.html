@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="id-ID" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow">
+    <title>FaktaNews — Berita Faktual, Informasi Aktual | Portal Berita Terpercaya</title>
+    <meta name="description" content="Berita terkini nasional, politik, ekonomi, internasional, olahraga, hiburan, dan gaya hidup. Disadur dari CNN Indonesia dan sumber terpercaya.">
+    <meta name="keywords" content="berita terkini, berita indonesia, nasional, politik, ekonomi, cnn indonesia, faktanews">
+    <meta name="author" content="Johan- News">
+    <link rel="canonical" href="https://faktanews.id/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FaktaNews — Berita Faktual, Informasi Aktual">
+    <meta property="og:description" content="Portal berita terpercaya, berita terkini dan teraktual.">
+    <meta property="og:url" content="https://faktanews.id/">
+    
+    <!-- Font & Icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palet Warna CNN Indonesia */
+            --merah-utama: #CC0000;
+            --merah-gelap: #990000;
+            --merah-terang: #FF3333;
+            --hitam-utama: #000000;
+            --hitam-teks: #1A1A1A;
+            --abu-gelap: #333333;
+            --abu-teks: #555555;
+            --abu-sedang: #888888;
+            --abu-muda: #E5E5E5;
+            --abu-sangatmuda: #F5F5F5;
+            --putih: #FFFFFF;
+            --biru-tombol: #0066CC;
+            --emas-sorotan: #FFB800;
+            
+            /* Bayangan & Transisi */
+            --bayangan-lembut: 0 2px 8px rgba(0,0,0,0.08);
+            --bayangan-kuat: 0 4px 20px rgba(0,0,0,0.15);
+            --transisi-cepat: all 0.2s ease;
+            --transisi-lambat: all 0.35s ease;
+        }
+
+        /* Reset & Dasar */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--hitam-teks);
+            background-color: #FAFAFA;
+        }
+        a { text-decoration: none; color: inherit; transition: var(--transisi-cepat); }
+        ul, ol { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; }
+        input, select, textarea { font-family: inherit; font-size: inherit; }
+        b, strong { font-weight: 700; }
+
+        /* Utilitas */
+        .kontainer { width: 94%; max-width: 1260px; margin: 0 auto; }
+        .tengah { display: flex; align-items: center; }
+        .antar { display: flex; justify-content: space-between; }
+        .sembunyi-hp { display: block; }
+        .tampil-hp { display: none; }
+
+        /* ==== BAGIAN ATAS: Baris Paling Atas ==== */
+        .baris-puncak {
+            background-color: var(--hitam-utama);
+            color: var(--putih);
+            font-size: 0.8rem;
+            padding: 6px 0;
+            border-bottom: 1px solid #222;
+        }
+        .baris-puncak .isi {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .kiri-puncak, .kanan-puncak { display: flex; gap: 18px; align-items: center; }
+        .ticker-berita {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            height: 24px;
+        }
+        .teks-ticker {
+            display: inline-block;
+            padding-left: 100%;
+            animation: geserTicker 30s linear infinite;
+            color: #FFD700;
+            font-weight: 500;
+        }
+        @keyframes geserTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .tautan-puncak { color: #CCC; }
+        .tautan-puncak:hover { color: var(--putih); }
+        .label-live {
+            background-color: var(--merah-utama);
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+            border-radius: 2px;
+            animation: kedip 1.5s infinite;
+        }
+        @keyframes kedip {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* ==== KEPALA LAMAN ==== */
+        .kepala-laman {
+            background-color: var(--putih);
+            border-bottom: 2px solid var(--abu-muda);
+            padding: 20px 0;
+        }
+        .isi-kepala {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .blok-kiri { display: flex; align-items: center; gap: 24px; }
+        .tombol-samping {
+            font-size: 1.4rem;
+            padding: 8px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--abu-muda);
+        }
+        .logo {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+        .logo-merah { color: var(--merah-utama); }
+        .logo-hitam { color: var(--hitam-utama); }
+        .slogan {
+            font-size: 0.75rem;
+            color: var(--abu-sedang);
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .blok-kanan { display: flex; align-items: center; gap: 16px; }
+        .kotak-cari {
+            display: flex;
+            border: 1px solid var(--abu-muda);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: var(--transisi-cepat);
+        }
+        .kotak-cari:focus-within { border-color: var(--merah-utama); box-shadow: 0 0 0 2px rgba(204,0,0,0.1); }
+        .kotak-cari input {
+            border: none; outline: none;
+            padding: 10px 16px;
+            width: 260px;
+            font-size: 0.95rem;
+        }
+        .tombol-cari {
+            background-color: var(--merah-utama);
+            color: white;
+            padding: 0 20px;
+            font-weight: 700;
+        }
+        .tombol-cari:hover { background-color: var(--merah-gelap); }
+        .tombol-langganan {
+            background-color: var(--merah-utama);
+            color: white;
+            padding: 10px 20px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .tombol-langganan:hover { background-color: var(--merah-gelap); }
+
+        /* ==== MENU UTAMA ==== */
+        .bungkus-menu {
+            background-color: var(--putih);
+            border-bottom: 1px solid var(--abu-muda);
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow: var(--bayangan-lembut);
+        }
+        .menu-atas {
+            display: flex;
+            align-items: center;
+        }
+        .tombol-semua-kategori {
+            background-color: var(--merah-utama);
+            color: white;
+            padding: 14px 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .daftar-menu-utama {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .item-menu { position: relative; }
+        .tautan-menu {
+            display: block;
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+        }
+        .tautan-menu:hover, .tautan-menu.aktif {
+            border-bottom-color: var(--merah-utama);
+            color: var(--merah-utama);
+        }
+        .menu-anak {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background-color: white;
+            box-shadow: var(--bayangan-kuat);
+            padding: 12px 0;
+            display: none;
+            z-index: 999;
+        }
+        .item-menu:hover .menu-anak { display: block; }
+        .tautan-anak {
+            display: block;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        .tautan-anak:hover { background-color: var(--abu-sangatmuda); color: var(--merah-utama); }
+        .bagian-kanan-menu {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .tautan-iklan {
+            color: var(--abu-teks);
+            font-size: 0.85rem;
+        }
+        .tautan-iklan:hover { color: var(--merah-utama); }
+
+        /* ==== TATA LETAK KONTEN UTAMA ==== */
+        .bungkus-konten {
+            padding: 24px 0 50px;
+        }
+        .kisi-utama {
+            display: grid;
+            grid-template-columns: 2.7fr 1fr;
+            gap: 30px;
+        }
+
+        /* ==== BLOK BERITA UTAMA & SLIDER ==== */
+        .blok-unggulan {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+        .berita-utama-besar {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            height: 420px;
+            box-shadow: var(--bayangan-lembut);
+            cursor: pointer;
+        }
+        .gambar-utama-besar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .berita-utama-besar:hover .gambar-utama-besar { transform: scale(1.03); }
+        .tutup-tegak {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 30px 24px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.4), transparent);
+            color: white;
+        }
+        .label-kat-besar {
+            display: inline-block;
+            background-color: var(--merah-utama);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .judul-utama-besar {
+            font-size: 1.7rem;
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+        .ringkas-utama-besar {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .meta-utama-besar {
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+        .kolom-berita-samping {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .berita-kecil-unggul {
+            display: flex;
+            gap: 12px;
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--bayangan-lembut);
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transisi-cepat);
+        }
+        .berita-kecil-unggul:hover { transform: translateY(-2px); box-shadow: var(--bayangan-kuat); }
+        .gambar-kecil {
+            width: 110px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .isi-berita-kecil { flex: 1; }
+        .judul-kecil {
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .waktu-kecil { font-size: 0.75rem; color: var(--abu-sedang); margin-top: 4px; }
+
+        /* ==== GAYA JUDUL BAGIAN ==== */
+        .kepala-bagian {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--abu-muda);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .teks-kepala-bagian {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--hitam-utama);
+            border-bottom: 3px solid var(--merah-utama);
+            padding-bottom: 10px;
+            margin-bottom: -12px;
+            display: inline-block;
+        }
+        .tautan-lihat-semua {
+            font-size: 0.9rem;
+            color: var(--merah-utama);
+            font-weight: 700;
+        }
+        .tautan-lihat-semua:hover { text-decoration: underline; }
+
+        /* ==== KISI BERITA REGULER ==== */
+        .kisi-berita {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .kartu-berita {
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--bayangan-lembut);
+            transition: var(--transisi-cepat);
+            cursor: pointer;
+        }
+        .kartu-berita:hover { transform: translateY(-4px); box-shadow: var(--bayangan-kuat); }
+        .bungkus-gambar-kartu {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+        .gambar-kartu {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+        .kartu-berita:hover .gambar-kartu { transform: scale(1.06); }
+        .label-kartu {
+            position: absolute;
+            top: 10px; left: 10px;
+            background-color: var(--merah-utama);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .isi-kartu { padding: 16px; }
+        .judul-kartu {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ringkas-kartu {
+            font-size: 0.85rem;
+            color: var(--abu-teks);
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .meta-kartu {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--abu-sedang);
+        }
+
+        /* ==== SIDEBAR ==== */
+        .blok-sidebar { display: flex; flex-direction: column; gap: 30px; }
+        .kotak-sidebar {
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--bayangan-lembut);
+        }
+        .kepala-kotak {
+            background-color: var(--hitam-utama);
+            color: white;
+            padding: 14px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+        .isi-kotak { padding: 18px; }
+        .daftar-tersusun li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--abu-sangatmuda);
+        }
+        .daftar-tersusun li:last-child { border-bottom: none; }
+        .tautan-daftar {
+            display: flex;
+            gap: 12px;
+        }
+        .nomor-peringkat {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--abu-muda);
+            min-width: 26px;
+            line-height: 1;
+        }
+        .teks-daftar {
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .tautan-daftar:hover .teks-daftar { color: var(--merah-utama); }
+        .waktu-daftar { font-size: 0.75rem; color: var(--abu-sedang); margin-top: 4px; }
+
+        /* ==== IKLAN / BLOK SOROTAN ==== */
+        .blok-sorotan {
+            background: linear-gradient(135deg, var(--merah-utama), var(--merah-gelap));
+            color: white;
+            padding: 24px;
+            border-radius: 6px;
+        }
+        .teks-sorotan h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .teks-sorotan p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 14px; }
+        .tombol-sorotan {
+            background-color: white;
+            color: var(--merah-utama);
+            padding: 10px 18px;
+            font-weight: 700;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .tombol-sorotan:hover { transform: scale(1.05); }
+
+        /* ==== HALAMAN BERITA LENGKAP ==== */
+        .bungkus-berita-penuh {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 30px 0 60px;
+            display: none;
+        }
+        .bungkus-berita-penuh.tampil { display: block; }
+        .navigasi-atas { margin-bottom: 20px; }
+        .kembali-link {
+            color: var(--merah-utama);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .kembali-link:hover { text-decoration: underline; }
+        .judul-berita-penuh {
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+        .baris-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--abu-muda);
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: var(--abu-teks);
+        }
+        .penulis-berita { font-weight: 700; color: var(--hitam-utama); }
+        .gambar-utama-penuh {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+        .keterangan-gambar {
+            font-size: 0.8rem;
+            color: var(--abu-sedang);
+            margin: -15px 0 25px;
+        }
+        .isi-berita-penuh {
+            font-size: 1.08rem;
+            line-height: 1.8;
+        }
+        .isi-berita-penuh p { margin-bottom: 20px; text-align: justify; }
+        .isi-berita-penuh h2, .isi-berita-penuh h3 {
+            font-size: 1.25rem;
+            margin: 30px 0 15px;
+            color: var(--hitam-utama);
+        }
+        .isi-berita-penuh blockquote {
+            border-left: 4px solid var(--merah-utama);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--abu-gelap);
+            background-color: var(--abu-sangatmuda);
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+        }
+        .kotak-sumber {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--abu-sangatmuda);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .kotak-sumber h4 { margin-bottom: 8px; }
+        .kotak-sumber a { color: var(--biru-tombol); text-decoration: underline; }
+
+        /* ==== KAKI LAMAN ==== */
+        .kaki-laman {
+            background-color: var(--hitam-utama);
+            color: #AAA;
+            padding: 50px 0 25px;
+            margin-top: 30px;
+        }
+        .kisi-kaki {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .logo-kaki {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .kaki-judul {
+            color: white;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+        .kaki-daftar li { margin-bottom: 10px; font-size: 0.9rem; }
+        .kaki-daftar a:hover { color: var(--merah-utama); }
+        .bawah-kaki {
+            border-top: 1px solid #222;
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ==== TAMPILAN HP ==== */
+        @media (max-width: 900px) {
+            .sembunyi-hp { display: none; }
+            .tampil-hp { display: block; }
+            .kisi-utama, .blok-unggulan, .kisi-berita, .kisi-kaki {
+                grid-template-columns: 1fr;
+            }
+            .menu-atas { flex-wrap: wrap; }
+            .daftar-menu-utama { display: none; width: 100%; order: 3; border-top: 1px solid #eee; margin-top: 8px; }
+            .daftar-menu-utama.tampil { display: flex; flex-direction: column; }
+            .berita-utama-besar { height: 300px; }
+            .gambar-utama-penuh { height: 250px; }
+            .kotak-cari input { width: 160px; }
+        }
+        @media (max-width: 640px) {
+            .logo { font-size: 1.8rem; }
+            .judul-utama-besar { font-size: 1.3rem; }
+            .judul-berita-penuh { font-size: 1.5rem; }
+            .blok-kanan { gap: 8px; }
+            .tombol-langganan { padding: 8px 12px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Baris Puncak: Ticker & Informasi -->
+<div class="baris-puncak">
+    <div class="kontainer isi">
+        <div class="kiri-puncak">
+            <span class="label-live">LIVE</span>
+            <span id="tanggalHari"></span>
+        </div>
+        <div class="ticker-berita sembunyi-hp">
+            <span class="teks-ticker">🔴 DKPP Bisa Periksa KPU soal Ijazah Gibran Jika Ada Aduan — MK Tak Temukan Bukti Ijazah Setara SMA — Disadur dari CNN Indonesia & detikNews</span>
+        </div>
+        <div class="kanan-puncak sembunyi-hp">
+            <a href="#" class="tautan-puncak">Langganan</a>
+            <a href="#" class="tautan-puncak">Masuk</a>
+        </div>
+    </div>
+</div>
+
+<!-- Kepala Laman -->
+<header class="kepala-laman">
+    <div class="kontainer isi-kepala">
+        <div class="blok-kiri">
+            <button class="tombol-samping tampil-hp" onclick="toggleMenuHp()">☰</button>
+            <a href="#" class="logo" onclick="kembaliBeranda()">
+                <span class="logo-merah">FAKTA</span><span class="logo-hitam">NEWS</span>
+            </a>
+            <span class="slogan sembunyi-hp">Berita Faktual • Informasi Aktual</span>
+        </div>
+        <div class="blok-kanan">
+            <div class="kotak-cari">
+                <input type="text" id="kataKunci" placeholder="Cari berita...">
+                <button class="tombol-cari" onclick="cariBerita()">Cari</button>
+            </div>
+            <a href="#" class="tombol-langganan sembunyi-hp">Langganan</a>
+        </div>
+    </div>
+</header>
+
+<!-- Menu Utama -->
+<nav class="bungkus-menu">
+    <div class="kontainer menu-atas">
+        <button class="tombol-semua-kategori sembunyi-hp">
+            <span>☰</span> Semua Kategori
+        </button>
+        <ul class="daftar-menu-utama" id="menuUtama">
+            <li class="item-menu"><a href="#" class="tautan-menu aktif" onclick="kembaliBeranda(event)">Beranda</a></li>
+            <li class="item-menu">
+                <a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Nasional')">Nasional</a>
+                <ul class="menu-anak">
+                    <li><a href="#" class="tautan-anak" onclick="pilihKategori(event, 'Hukum & Kriminal')">Hukum & Kriminal</a></li>
+                    <li><a href="#" class="tautan-anak" onclick="pilihKategori(event, 'Pemerintahan')">Pemerintahan</a></li>
+                    <li><a href="#" class="tautan-anak" onclick="pilihKategori(event, 'Pemilu')">Pemilu</a></li>
+                </ul>
+            </li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Politik')">Politik</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Ekonomi')">Ekonomi</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Internasional')">Internasional</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Olahraga')">Olahraga</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Hiburan')">Hiburan</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Gaya Hidup')">Gaya Hidup</a></li>
+            <li class="item-menu"><a href="#" class="tautan-menu" onclick="pilihKategori(event, 'Teknologi')">Teknologi</a></li>
+        </ul>
+        <div class="bagian-kanan-menu sembunyi-hp">
+            <a href="#" class="tautan-iklan">Ikut Kami</a>
+            <a href="#" class="tautan-iklan">Iklan</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Halaman Beranda -->
+<div id="halamanDepan">
+    <div class="kontainer bungkus-konten kisi-utama">
+        <main>
+            <!-- Blok Unggulan Utama -->
+            <section class="blok-unggulan">
+                <div class="berita-utama-besar" onclick="bukaBerita(0)">
+                    <span class="label-kat-besar" id="labelKatBesar">NASIONAL</span>
+                    <img class="gambar-utama-besar" id="gambarBesar" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop" alt="">
+                    <div class="tutup-tegak">
+                        <h2 class="judul-utama-besar" id="judulBesar"></h2>
+                        <p class="ringkas-utama-besar" id="ringkasBesar"></p>
+                        <p class="meta-utama-besar">
+                            <span id="penulisBesar"></span> — <span id="waktuBesar"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="kolom-berita-samping" id="kolomSamping"></div>
+            </section>
+
+            <!-- Berita Terkini / Kategori -->
+            <section>
+                <div class="kepala-bagian">
+                    <h2 class="teks-kepala-bagian" id="judulBagian">Berita Terkini</h2>
+                    <a href="#" class="tautan-lihat-semua" onclick="kembaliBeranda()">Lihat Semua →</a>
+                </div>
+                <div class="kisi-berita" id="kisiBerita"></div>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="blok-sidebar">
+            <!-- Terpopuler -->
+            <div class="kotak-sidebar">
+                <h3 class="kepala-kotak">🔥 Terpopuler</h3>
+                <ul class="isi-kotak daftar-tersusun" id="daftarPopuler"></ul>
+            </div>
+            
+            <!-- Sorotan -->
+            <div class="blok-sorotan">
+                <div class="teks-sorotan">
+                    <h3>Berita Terpercaya, Setiap Saat</h3>
+                    <p>Dapatkan informasi akurat disadur dari CNN Indonesia dan sumber berita terpercaya lainnya.</p>
+                    <a href="#" class="tombol-sorotan">Baca Sekarang</a>
+                </div>
+            </div>
+            
+            <!-- Kategori Terkait -->
+            <div class="kotak-sidebar">
+                <h3 class="kepala-kotak">Kategori</h3>
+                <ul class="isi-kotak daftar-tersusun">
+                    <li><a href="#" class="tautan-daftar" onclick="pilihKategori(event, 'Nasional')"><span class="teks-daftar">Nasional</span></a></li>
+                    <li><a href="#" class="tautan-daftar" onclick="pilihKategori(event, 'Politik')"><span class="teks-daftar">Politik</span></a></li>
+                    <li><a href="#" class="tautan-daftar" onclick="pilihKategori(event, 'Ekonomi')"><span class="teks-daftar">Ekonomi</span></a></li>
+                    <li><a href="#" class="tautan-daftar" onclick="pilihKategori(event, 'Internasional')"><span class="teks-daftar">Internasional</span></a></li>
+                    <li><a href="#" class="tautan-daftar" onclick="pilihKategori(event, 'Olahraga')"><span class="teks-daftar">Olahraga</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<!-- Halaman Berita Lengkap -->
+<article class="bungkus-berita-penuh kontainer" id="halamanBeritaPenuh">
+    <div class="navigasi-atas">
+        <a href="#" class="kembali-link" onclick="kembaliBeranda(event)">← Kembali ke Beranda</a>
+    </div>
+    <h1 class="judul-berita-penuh" id="judulPenuh"></h1>
+    <div class="baris-meta">
+        <span id="katPenuh"></span>
+        <span>Oleh <span class="penulis-berita" id="penulisPenuh"></span></span>
+        <span id="tglPenuh"></span>
+    </div>
+    <img class="gambar-utama-penuh" id="gambarPenuh" src="" alt="">
+    <p class="keterangan-gambar" id="ketGambar">Ilustrasi — Sumber gambar: Unsplash</p>
+    <div class="isi-berita-penuh" id="isiPenuh"></div>
+</article>
+
+<!-- Kaki Laman -->
+<footer class="kaki-laman">
+    <div class="kontainer">
+        <div class="kisi-kaki">
+            <div>
+                <div class="logo-kaki">
+                    <span style="color:#CC0000">FAKTA</span><span style="color:white">NEWS</span>
+                </div>
+                <p style="font-size:0.9rem; margin-bottom:15px;">Berita Faktual, Informasi Aktual.<br>Disadur dari CNN Indonesia dan sumber berita terpercaya lainnya.</p>
+                <p style="font-weight:700; color:white;">Pembuat Berita: Johan- News</p>
+            </div>
+            <div>
+                <h4 class="kaki-judul">Berita</h4>
+                <ul class="kaki-daftar">
+                    <li><a href="#" onclick="pilihKategori(event, 'Nasional')">Nasional</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Politik')">Politik</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Ekonomi')">Ekonomi</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Internasional')">Internasional</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="kaki-judul">Hiburan</h4>
+                <ul class="kaki-daftar">
+                    <li><a href="#" onclick="pilihKategori(event, 'Olahraga')">Olahraga</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Hiburan')">Hiburan</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Gaya Hidup')">Gaya Hidup</a></li>
+                    <li><a href="#" onclick="pilihKategori(event, 'Teknologi')">Teknologi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="kaki-judul">Tentang</h4>
+                <ul class="kaki-daftar">
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Hubungi Redaksi</a></li>
+                    <li><a href="#">Pedoman Pemberitaan</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="kaki-judul">Ikuti Kami</h4>
+                <ul class="kaki-daftar">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter / X</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bawah-kaki">
+            <p>© 2026 FaktaNews — faktanews.id. Seluruh konten disadur dan dikelola sesuai pedoman. Berita diambil dari CNN Indonesia, detikNews, dan sumber terpercaya lainnya.<br>
+            Pembuat Berita: Johan- News. Semua hak dilindungi undang-undang.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ==================================================
+// 📋 BANK DATA BERITA — TAMBAH DI BAGIAN INI
+// Format: Salin blok objek di bawah, tempel di urutan atas
+// ==================================================
+const BANK_BERITA = [
+    // === BERITA UTAMA ===
+    {
+        id: 1,
+        kategori: "Nasional",
+        subkategori: "Hukum & Kriminal",
+        judul: "DKPP Bisa Periksa KPU soal Ijazah Gibran Jika Ada Aduan",
+        ringkasan: "Ketua DKPP Heddy Lugito menegaskan kewenangan lembaganya bersikap pasif, namun wajib memeriksa jika aduan masuk. Pernyataan ini muncul menyusul temuan Mahkamah Konstitusi terkait dokumen pendidikan Wakil Presiden.",
+        isi: `
+            <p><strong>JAKARTA</strong> — Dewan Kehormatan Penyelenggara Pemilu (DKPP) menyatakan dapat melakukan pemeriksaan terhadap Komisi Pemilihan Umum (KPU) jika terdapat pengaduan resmi terkait kelengkapan dokumen salah satu calon Wakil Presiden pada Pemilihan Presiden 2024.</p>
+
+            <p>Pernyataan ini disampaikan menyusul putusan Mahkamah Konstitusi (MK) yang tidak menemukan bukti adanya ijazah Sekolah Menengah Atas atau yang sederajat milik Gibran Rakabuming Raka saat mendaftar sebagai calon Wakil Presiden.</p>
+
+            <blockquote>"Undang-undang membatasi kewenangan DKPP bersikap pasif. Memeriksa perkara bila ada aduan masuk. Tanpa adanya pengaduan, tidak dibenarkan melakukan pemeriksaan," ujar Ketua DKPP Heddy Lugito kepada wartawan, Kamis (8/10/2026).</blockquote>
+
+            <p>Heddy menegaskan, apabila aduan telah masuk dan memenuhi syarat formil serta materiil, DKPP tidak boleh menolak dan wajib menindaklanjutinya.</p>
+
+            <h3>Keputusan MK terkait dokumen pendidikan</h3>
+
+            <p>Sebelumnya, MK menolak gugatan Perselisihan Hasil Pemilihan Umum (PHPU) yang mempersoalkan syarat pendidikan calon Wakil Presiden. Meski gugatan ditolak, MK menyatakan tidak menemukan bukti ijazah setara SMA yang dimaksud.</p>
+
+            <p>Hakim MK Arsul Sani menjelaskan dokumen berupa <em>certificate of attendance</em> yang dijadikan dasar penerbitan surat keterangan sama sekali tidak menerangkan keberhasilan menamatkan jenjang pendidikan tertentu, melainkan hanya membuktikan kehadiran dalam perkuliahan.</p>
+
+            <p>"Tidak ada dokumen yang bisa menunjukkan Gibran telah menamatkan pendidikan SMA di luar negeri," tegas Arsul.</p>
+
+            <p>Namun, MK menegaskan tidak berwenang mendiskualifikasi Gibran dari jabatannya. Hal tersebut menjadi ranah lembaga lain yang berwenang menilai keabsahan dan keterpenuhan syarat calon sesuai konstitusi.</p>
+
+            <h3>Posisi lembaga terkait</h3>
+
+            <p>Sampai saat ini belum ada aduan resmi yang diajukan ke DKPP terkait persoalan tersebut. Masyarakat yang merasa berkepentingan dapat mengajukan laporan melalui tata cara yang berlaku.</p>
+
+            <div class="kotak-sumber">
+                <h4>Sumber Pemberitaan</h4>
+                <p>Disadur dari: <strong>detikNews</strong> — Isal Mawardi, Kamis, 08 Okt 2026 06:08 WIB. Juga merujuk pemberitaan <strong>CNN Indonesia</strong>.</p>
+                <p>Penulisan ulang dan penyuntingan: <strong>Johan- News</strong> untuk FaktaNews.</p>
+            </div>
+        `,
+        gambar: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop",
+        ketGambar: "Ilustrasi — Gedung KPU RI. Foto: Andhika Prasetia/detikcom",
+        penulis: "Johan- News",
+        tglPublikasi: "Kamis, 8 Oktober 2026 — 16:08 WIB",
+        bacaJuga: []
+    },
+    // === BERITA TAMBAHAN 1 ===
+    {
+        id: 2,
+        kategori: "Politik",
+        subkategori: "Pemilu",
+        judul: "MK Tegaskan Bukan Kewenangan Mendiskualifikasi Gibran",
+        ringkasan: "Hakim Konstitusi Adies Kadir menjelaskan ranah masing-masing lembaga terkait verifikasi syarat calon pemimpin negara.",
+        isi: `
+            <p><strong>JAKARTA</strong> — Mahkamah Konstitusi menegaskan tidak memiliki wewenang untuk mendiskualifikasi Gibran Rakabuming Raka dari jabatannya sebagai Wakil Presiden, meskipun ditemukan fakta belum adanya dokumen ijazah setara SMA.</p>
+            <p>Penegasan ini disampaikan Hakim MK Adies Kadir saat membacakan putusan PHPU Pilpres 2024. Ia menyatakan penilaian kelengkapan syarat calon masuk ranah lembaga lain sebagaimana diatur dalam UUD 1945.</p>
+            <p><strong>Penulis:</strong> Johan- News<br>Sumber: CNN Indonesia / detikNews — 8 Oktober 2026</p>
+        `,
+        gambar: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=250&fit=crop",
+        ketGambar: "Ilustrasi — Gedung Mahkamah Konstitusi RI.",
+        penulis: "Johan- News",
+        tglPublikasi: "Kamis, 8 Oktober 2026 — 14:30 WIB"
+    },
+    // === BERITA TAMBAHAN 2 ===
+    {
+        id: 3,
+        kategori: "Nasional",
+        subkategori: "Pemerintahan",
+        judul: "Pemerintah Fokus Percepatan Pembangunan Infrastruktur Tahun Depan",
+        ringkasan: "Sejumlah proyek strategis dipastikan masuk tahap pelaksanaan guna mendorong pemerataan ekonomi di seluruh wilayah Indonesia.",
+        isi: `
+            <p><strong>JAKARTA</strong> — Pemerintah menegaskan komitmen mempercepat pelaksanaan proyek-proyek infrastruktur strategis pada tahun mendatang. Langkah ini bertujuan memperkuat konektivitas nasional dan pemerataan kesejahteraan antarwilayah.</p>
+            <p>Dana dialokasikan untuk peningkatan jalan nasional, jembatan penghubung, serta penguatan pelabuhan utama di berbagai pulau.</p>
+            <p><strong>Penulis:</strong> Johan- News</p>
+        `,
+        gambar: "https://images.unsplash.com/photo-1495020689067-9265f170c465?w=400&h=250&fit=crop",
+        ketGambar: "Ilustrasi — Pembangunan infrastruktur.",
+        penulis: "Johan- News",
+        tglPublikasi: "Kamis, 8 Oktober 2026 — 12:00 WIB"
+    },
+    // === BERITA TAMBAHAN 3 ===
+    {
+        id: 4,
+        kategori: "Ekonomi",
+        judul: "Rupiah Menguat Didukung Aliran Modal Asing",
+        ringkasan: "Nilai tukar rupiah terhadap dolar AS tercatat menguat di awal pekan, didukung sentimen positif pasar keuangan global.",
+        isi: `
+            <p><strong>JAKARTA</strong> — Nilai tukar rupiah tercatat menguat terhadap dolar AS pada pembukaan perdagangan awal pekan ini. Penguatan didorong masuknya aliran investasi asing ke pasar surat berharga negara
